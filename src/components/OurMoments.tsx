@@ -1,4 +1,9 @@
 import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const col1Images = [
   "https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?q=80&w=500&auto=format&fit=crop", // Silhouette in rain
@@ -28,14 +33,56 @@ const col3Images = [
 ];
 
 export default function OurMoments() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      // Heading slide-in
+      gsap.fromTo(
+        ".moments-heading",
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.0,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".moments-heading",
+            start: "top 85%",
+          },
+        }
+      );
+
+      // Grid Box fade + scale slide-in
+      gsap.fromTo(
+        ".moments-grid-container",
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".moments-grid-container",
+            start: "top 80%",
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section className="py-24 md:py-32 bg-[#0a0a0a] border-t border-white/5 relative z-20 overflow-hidden hover-pause">
+    <section
+      ref={containerRef}
+      className="py-24 md:py-32 bg-[#0a0a0a] border-t border-white/5 relative z-20 overflow-hidden hover-pause"
+    >
       {/* Background Visual Flare */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#c9a84c]/2 rounded-full filter blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Title Section */}
-        <div className="mb-16 text-center max-w-2xl mx-auto">
+        <div className="moments-heading mb-16 text-center max-w-2xl mx-auto opacity-0">
           <p className="text-xs uppercase tracking-[0.4em] text-[#c9a84c] font-medium mb-3">
             EXPLORE TIMELESS SHOTS
           </p>
@@ -46,7 +93,7 @@ export default function OurMoments() {
         </div>
 
         {/* 3-Column Grid Container with fixed height clipping for smooth overflow */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 h-[700px] overflow-hidden rounded-3xl border border-white/5 bg-black/40 p-4 md:p-6 backdrop-blur-[2px] relative">
+        <div className="moments-grid-container grid grid-cols-2 md:grid-cols-3 gap-6 h-[700px] overflow-hidden rounded-3xl border border-white/5 bg-black/40 p-4 md:p-6 backdrop-blur-[2px] relative opacity-0">
           
           {/* Column 1: Moves upward */}
           <div className="relative h-full overflow-hidden flex flex-col justify-center">

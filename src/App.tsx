@@ -41,6 +41,8 @@ export default function App() {
       touchMultiplier: 1.5,
     });
 
+    (window as any).lenis = lenis;
+
     // Synchronize Lenis with ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -56,6 +58,7 @@ export default function App() {
 
     return () => {
       lenis.destroy();
+      (window as any).lenis = null;
       gsap.ticker.remove(gsapTickerCallback);
     };
   }, [isLoaded]);

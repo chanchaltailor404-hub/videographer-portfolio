@@ -18,12 +18,25 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if ((window as any).lenis) {
+      if (isMobileMenuOpen) {
+        (window as any).lenis.stop();
+      } else {
+        (window as any).lenis.start();
+      }
+    }
+  }, [isMobileMenuOpen]);
+
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
-      // Find offset or scroll smoothly
-      element.scrollIntoView({ behavior: "smooth" });
+      if ((window as any).lenis) {
+        (window as any).lenis.scrollTo(element, { duration: 1.5 });
+      } else {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
