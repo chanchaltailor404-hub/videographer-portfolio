@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-bebas: "Bebas Neue", sans-serif;
+  --font-dmsans: "DM Sans", sans-serif;
+  --color-gold: #c9a84c;
+  --color-gold-hover: #e0be5a;
+  --color-black-pure: #0a0a0a;
+}
+
+@layer base {
+  html, body {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-family: var(--font-dmsans);
+    overflow-x: hidden;
+  }
+}
+
+/* Scrollbar customizations */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1c1c1c;
+  border: 2px solid #0a0a0a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c9a84c;
+}
+
+/* Page Preloader fade animation classes */
+.preloader-lock {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Cinematic Infinite Scrolling Marquee */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-33.333333%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 35s linear infinite;
+  width: max-content;
+}
+
+/* Horizontal Flowing Images Animations */
+@keyframes scroll-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-scroll-left {
+  display: inline-flex;
+  animation: scroll-left 50s linear infinite;
+}
+
+.animate-scroll-right {
+  display: inline-flex;
+  animation: scroll-right 45s linear infinite;
+}
+
+.hover-pause:hover .animate-scroll-left,
+.hover-pause:hover .animate-scroll-right,
+.hover-pause:hover .animate-scroll-up,
+.hover-pause:hover .animate-scroll-down {
+  animation-play-state: paused;
+}
+
+/* Vertical Flowing Images Animations */
+@keyframes scroll-up {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translate3d(0, -50%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-scroll-up {
+  display: flex;
+  flex-direction: column;
+  animation: scroll-up 35s linear infinite;
+}
+
+.animate-scroll-down {
+  display: flex;
+  flex-direction: column;
+  animation: scroll-down 35s linear infinite;
+}
+
+
